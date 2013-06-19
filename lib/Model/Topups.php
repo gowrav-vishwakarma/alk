@@ -36,11 +36,11 @@ class Model_Topups extends Model_Table {
 
 			for($i=1;$i<=4;$i++){
 				if($member->get('sponsor_id') == 0) break;
-				$receive_gift_request=$this->add('Model_Request');
+				$receive_gift_request=$this->add('Model_Gift');
 				$sponsor = $member->ref('sponsor_id');
 
-				$receive_gift_request['request_from_id'] = $sponsor->ref('Topups')->tryLoadAny()->get('id');
-				$receive_gift_request['request_to_id'] = $this->id;
+				$receive_gift_request['gift_from_id'] = $this->id;
+				$receive_gift_request['gift_to_id'] = $sponsor->ref('Topups')->tryLoadAny()->get('id');
 				$receive_gift_request['requested_level'] = $i;
 				$receive_gift_request->save();
 

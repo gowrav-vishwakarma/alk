@@ -5,6 +5,9 @@ class page_user extends Page {
 	
 	function init(){
 		parent::init();
+
+		$this->add('H3')->set('Welcome '. $this->api->auth->model['name']);
+
 		$this->user_menu = $this->add('Menu');
 		$this->user_menu->addMenuItem('user_dashboard','Dashboard');
 		$this->user_menu->addMenuItem('user_newregistration','New Registration');
