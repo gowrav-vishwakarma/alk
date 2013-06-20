@@ -15,7 +15,7 @@ class View_GiftIncome extends View{
 		$this->template->trySet('gift_from',$model->ref('gift_from_id')->ref('member_id')->get('name'));
 		$this->template->trySet('at_level',$model['requested_level']);
 
-		if($model['status']=='Sent'){
+		if($model['status']=='Pending'){
 			$this->add('P',null,'approve_button')->set('Approve')->js('click')->univ()->frameURL('Approve Gift',$this->api->url('user_approvegift',array('request_id'=>$model->id)));
 			$this->add('P',null,'reject_button')->set('Reject')->js('click')->univ()->frameURL('Approve Gift',$this->api->url('user_rejectgift',array('request_id'=>$model->id)));
 		}

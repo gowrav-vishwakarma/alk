@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2013 at 06:12 PM
+-- Generation Time: Jun 20, 2013 at 08:19 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.6-13ubuntu3.10
 
@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `gift` (
   `bank_slip_id` int(11) NOT NULL,
   `gift_send_date` datetime NOT NULL,
   `requested_level` int(11) NOT NULL,
+  `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
@@ -42,17 +43,17 @@ CREATE TABLE IF NOT EXISTS `gift` (
 -- Dumping data for table `gift`
 --
 
-INSERT INTO `gift` (`id`, `gift_to_id`, `gift_from_id`, `status`, `approved_rejected_date`, `bank_slip_id`, `gift_send_date`, `requested_level`) VALUES
-(1, 2, 1, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 1),
-(2, 3, 2, 'Approved', '0000-00-00', 0, '2013-06-19 00:00:00', 1),
-(3, 3, 1, 'Approved', '0000-00-00', 0, '2013-06-19 00:00:00', 2),
-(4, 4, 3, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 1),
-(5, 4, 2, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 2),
-(6, 4, 1, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 3),
-(7, 5, 4, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 1),
-(8, 5, 3, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 2),
-(9, 5, 2, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 3),
-(10, 5, 1, 'Sent', '0000-00-00', 0, '2013-06-19 00:00:00', 4);
+INSERT INTO `gift` (`id`, `gift_to_id`, `gift_from_id`, `status`, `approved_rejected_date`, `bank_slip_id`, `gift_send_date`, `requested_level`, `last_update_date`) VALUES
+(1, 1, 2, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 1, '0000-00-00 00:00:00'),
+(2, 2, 3, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 1, '0000-00-00 00:00:00'),
+(3, 1, 3, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 2, '0000-00-00 00:00:00'),
+(4, 3, 4, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 1, '0000-00-00 00:00:00'),
+(5, 2, 4, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 2, '0000-00-00 00:00:00'),
+(6, 1, 4, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 3, '0000-00-00 00:00:00'),
+(7, 4, 5, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 1, '0000-00-00 00:00:00'),
+(8, 3, 5, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 2, '0000-00-00 00:00:00'),
+(9, 2, 5, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 3, '0000-00-00 00:00:00'),
+(10, 1, 5, 'Pending', '0000-00-00', 0, '2013-06-20 00:00:00', 4, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -73,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `account_number` varchar(255) NOT NULL,
   `IFSC` varchar(255) NOT NULL,
   `bank_location` varchar(255) NOT NULL,
+  `points_available` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -80,12 +82,12 @@ CREATE TABLE IF NOT EXISTS `member` (
 -- Dumping data for table `member`
 --
 
-INSERT INTO `member` (`id`, `sponsor_id`, `name`, `username`, `password`, `mobile_number`, `email_Id`, `is_active`, `bank_name`, `account_number`, `IFSC`, `bank_location`) VALUES
-(1, NULL, 'root 1', 'root 1', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1'),
-(2, 1, 'root 2', 'root 2', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1'),
-(3, 2, 'root 3', 'root 3', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1'),
-(4, 3, 'root 4', 'root 4', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1'),
-(5, 4, 'root 5', 'root 5', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1');
+INSERT INTO `member` (`id`, `sponsor_id`, `name`, `username`, `password`, `mobile_number`, `email_Id`, `is_active`, `bank_name`, `account_number`, `IFSC`, `bank_location`, `points_available`) VALUES
+(1, NULL, 'root 1', 'root 1', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0),
+(2, 1, 'root 2', 'root 2', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0),
+(3, 2, 'root 3', 'root 3', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0),
+(4, 3, 'root 4', 'root 4', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 3000),
+(5, 4, 'root 5', 'root 5', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0);
 
 -- --------------------------------------------------------
 
@@ -130,7 +132,6 @@ CREATE TABLE IF NOT EXISTS `topups` (
   `member_id` int(11) NOT NULL,
   `created_at` date NOT NULL,
   `withdrawal_requested_on` date NOT NULL,
-  `pin_sold` int(11) NOT NULL,
   `is_withdrawable` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
@@ -139,12 +140,12 @@ CREATE TABLE IF NOT EXISTS `topups` (
 -- Dumping data for table `topups`
 --
 
-INSERT INTO `topups` (`id`, `member_id`, `created_at`, `withdrawal_requested_on`, `pin_sold`, `is_withdrawable`) VALUES
-(1, 1, '2013-06-19', '0000-00-00', 0, 0),
-(2, 2, '2013-06-19', '0000-00-00', 0, 0),
-(3, 3, '2013-06-19', '0000-00-00', 0, 0),
-(4, 4, '2013-06-19', '0000-00-00', 0, 0),
-(5, 5, '2013-06-19', '0000-00-00', 0, 0);
+INSERT INTO `topups` (`id`, `member_id`, `created_at`, `withdrawal_requested_on`, `is_withdrawable`) VALUES
+(1, 1, '2013-06-20', '0000-00-00', 0),
+(2, 2, '2013-06-20', '0000-00-00', 0),
+(3, 3, '2013-06-20', '0000-00-00', 0),
+(4, 4, '2013-06-20', '0000-00-00', 0),
+(5, 5, '2013-06-20', '0000-00-00', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

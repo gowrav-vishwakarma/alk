@@ -15,6 +15,7 @@ class Model_MemberAll extends Model_Table{
 		$this->addField('account_number')->type('boolean');
 		$this->addField('IFSC')->type('boolean');
 		$this->addField('bank_location')->type('boolean');
+		$this->addField('points_available');
 		
 		$this->hasMany('MemberAll','sponsor_id');
 		$this->hasMany('Topups','member_id');

@@ -7,6 +7,9 @@ class View_GiftExpense extends View{
 	function setModel($model){
 		if(!($model instanceof Model_Gift)) throw $this->exception('Use Model_Gift type of model here');
 
+		$this->addClass('gift_income_'.$model->id);
+		$this->js('reload_me')->reload();
+
 		$this->template->trySet('status',$model['status']);
 		switch($model['status']){
 			case "Approved":

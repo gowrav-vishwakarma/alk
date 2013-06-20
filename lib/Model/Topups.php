@@ -7,7 +7,6 @@ class Model_Topups extends Model_Table {
 		$this->hasOne('MemberAll','member_id');
 		$this->addField('created_at')->type('date')->defaultValue(date('Y-m-d'));
 		$this->addField('withdrawal_requested_on')->type('date')->defaultValue(null);
-		$this->addField('pin_sold')->defaultValue(0);
 		$this->addField('is_withdrawable')->type('boolean')->defaultValue(false);
 
 		$this->hasMany('GiftReceived','gift_to_id');

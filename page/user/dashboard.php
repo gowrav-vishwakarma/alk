@@ -12,6 +12,9 @@ class page_user_dashboard extends page_user {
 		$right_col=$columns->addColumn(4);
 
 
+		$right_col->add('View_Wallet');
+		$right_col->add('HR');
+		
 		$left_col->add('H3')->set('Your Income Part');
 		$right_col->add('H3')->set('Your Invest Part');
 
