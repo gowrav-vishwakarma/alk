@@ -2,13 +2,13 @@
 class View_GiftIncome extends View{
 	function init(){
 		parent::init();
+		$this->js('reload_me')->reload();
 	}
 
 	function setModel($model){
 		if(!($model instanceof Model_Gift)) throw $this->exception('Use Model_Gift type of model here');
 
 		$this->addClass('gift_income_'.$model->id);
-		$this->js('reload_me')->reload();
 		
 		$this->add('Button',null,'message_button')->set('Message')->js('click')->univ()->frameURL('New Window',$this->api->url());
 		$this->template->trySet('requested_date',date('d-M-Y',strtotime($model['gift_send_date'])));

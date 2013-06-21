@@ -11,10 +11,10 @@ class Model_Topups extends Model_Table {
 
 		$this->hasMany('GiftReceived','gift_to_id');
 		$this->hasMany('GiftSent','gift_from_id');
-		$this->hasMany('Pins','created_by_id');
-		$this->hasMany('Pins','current_owner_id');
-		$this->hasMany('PinPurchaseRequest','request_from_id');
-		$this->hasMany('PinPurchaseRequest','currently_requested_to_id');
+		// $this->hasMany('Pins','created_by_id');
+		// $this->hasMany('Pins','current_owner_id');
+		$this->hasMany('PinPurchaseExpense','request_from_id');
+		$this->hasMany('PinPurchaseIncome','currently_requested_to_id');
 
 		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);

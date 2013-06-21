@@ -22,6 +22,7 @@ class Model_Gift extends Model_Table {
 	}
 
 	function approve(){
+		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
 		$this['status'] = 'Approved';
 		$this->save();
 		if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() == 4){
@@ -39,6 +40,7 @@ class Model_Gift extends Model_Table {
 	}
 
 	function reject(){
+		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
 		$this['status'] = 'Rejected';
 		$this->save();
 		// if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() == 4){
