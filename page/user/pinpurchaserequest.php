@@ -15,6 +15,10 @@ class page_user_pinpurchaserequest extends Page{
 
 			if($form->get('points_required') > 5) $form->displayError('points_required','You cannot request for more then 5 points at a time');
 
+			$ppr=$this->add('Model_PinPurchaseRequest');
+			$ppr->generateRequest($form->get('points_required'));
+
+			$form->js(null,$form->js()->_selector('.pinrequestexpense')->trigger('reload_me'))->univ()->closeDialog()->execute();
 			
 		}
 	}

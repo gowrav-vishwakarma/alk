@@ -9,4 +9,8 @@ class Model_PinPurchaseRequest extends Model_Table{
 		$this->addField('request_at')->type('date');
 		$this->addfield('status')->enum(array('Open','Accepted','forwarded','rejected'));
 	}
+
+	function generateRequest($points){
+
+	}
 }

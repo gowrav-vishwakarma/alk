@@ -10,6 +10,8 @@ class View_GiftExpense extends View{
 		$this->addClass('gift_income_'.$model->id);
 		$this->js('reload_me')->reload();
 
+		$this->add('Button',null,'form')->set('upload bank slip')->addClass('span12');
+
 		$this->template->trySet('status',$model['status']);
 		switch($model['status']){
 			case "Approved":
@@ -19,6 +21,7 @@ class View_GiftExpense extends View{
 				$this->template->trySet('icon','ui-icon ui-icon-close');
 				break;
 			default:
+				$this->template->trySet('icon','ui-icon ui-icon-minus');
 		}
 		parent::setModel($model);
 	}

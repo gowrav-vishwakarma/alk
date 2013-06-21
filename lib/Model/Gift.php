@@ -10,7 +10,8 @@ class Model_Gift extends Model_Table {
 		$this->addField('gift_send_date')->type('date')->defaultValue(date('Y-m-d'));
 		$this->addField('status')->enum(array("Pending","Approved","Rejected","Admin Approved"))->defaultValue('Pending');
 		$this->addField("approved_rejected_date")->type('date')->defaultValue(null);
-		$this->addField('bank_slip_id');
+		$this->add("filestore/Field_Image","bank_slip_id")->type('image');
+		// $this->addField('bank_slip_id');
 		$this->addField('last_update_date')->system(true)->defaultValue(date('Y-m-d H:i:s'));
 
 		$this->addHook('beforeSave',$this);
