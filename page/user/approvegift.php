@@ -9,7 +9,7 @@ class page_user_approvegift extends Page{
 		$r=$this->add('Model_Gift');
 		$r->load($_GET['request_id']);
 
-		if($r['status'] != 'Pending') {
+		if($r['status'] != 'Pending' AND $r['status'] != 'Complained') {
 			$this->add('View_Error')->set('This Gift is already ' . $r['status']);
 			return;
 		}		

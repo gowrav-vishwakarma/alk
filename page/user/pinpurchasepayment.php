@@ -47,9 +47,14 @@ class page_user_pinpurchasepayment extends Page {
 			$complaint->addSubmit("Send To Admin");
 
 			if($complaint->isSubmitted()){
-				$request_to_pay['status']=='Complained';
-				$request_to_pay->save();
-				$request_to_pay->sendToAdmin();
+
+				$gift_to_member=$this->add('Model_Member');
+				$gift_to_member->join('topups.member_id')->join('pin_purchase_request.currently_requested_to_id')->addField("request_pk",'id');
+				$gift_to_member->addCondition('request_pk',$_GET['request_id']);
+				$gift_to_member->tryLoadAny();
+
+				$request_to_pay->sendComplaint($this->api->auth->model->id, $gift_to_member->id,$complaint->get('message'));
+				$complaint->js(null, $complaint->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'))->univ()->closeDialog()->execute();
 			}
 		}
 

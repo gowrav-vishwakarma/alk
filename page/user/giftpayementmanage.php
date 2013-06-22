@@ -27,7 +27,7 @@ class page_user_giftpayementmanage extends Page {
 
 		$right->add('HtmlElement')->setElement('img')->setAttr('src',$gift['bank_slip']);
 
-		if($gift['status']=='Pending'){
+		if($gift['status']=='Pending' OR $gift['status']=='Rejected'){
 			$left->add('H4')->set('Manage your bank slip');
 			$image_form=$left->add('Form');
 			$image_form->setModel($gift,array('bank_slip_id'));
@@ -45,12 +45,18 @@ class page_user_giftpayementmanage extends Page {
 
 		if($gift['status']=='Rejected'){
 			$complaint_form = $left->add('Form');
+			$complaint_form->add('View_Error')->set('This Gift you sent is rejected by receiver, You can place a complaint to admin');
 			$complaint_form->addField('line','message');
 			$complaint_form->addSubmit('Send to Admin');
 
 			if($complaint_form->isSubmitted()){
-				$gift->complaint();
-				$complaint_form->js()->univ()->closeDialog()->execute();
+				$gift_to_member=$this->add('Model_Member');
+				$gift_to_member->join('topups.member_id')->join('gift.gift_to_id')->addField("gift_pk",'id');
+				$gift_to_member->addCondition('gift_pk',$_GET['gift_id']);
+
+				$gift_to_member->tryLoadAny();
+				$gift->sendComplaint($this->api->auth->model->id, $gift_to_member->id,$complaint_form->get('message'));
+				$complaint_form->js(null,$complaint_form->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'))->univ()->closeDialog()->execute();
 			}
 		}
 

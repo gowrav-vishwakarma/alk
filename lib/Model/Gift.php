@@ -36,6 +36,20 @@ class Model_Gift extends Model_Table {
 				$member->save();
 			}
 		}
+
+		// Nutralize any complins for this gift IF ANY
+
+		$com=$this->add('Model_Complain');
+		$com->addCondition('gift_id',$this->id);
+		$com->addCondition('status','Send');
+		
+		foreach($com as $c){
+			$com['status']='Aprroved By Receiver';
+			$com->saveAndUnload();
+		}
+
+
+
 		// throw $this->exception('approved');
 	}
 
@@ -48,5 +62,21 @@ class Model_Gift extends Model_Table {
 		// 	$sender['is_withdrawable']=true;
 		// 	$sender->save();
 		// }
+	}
+
+	function sendComplaint($from_id,$against_id,$gift_id=null,$pin_request_id=null,$msg){
+		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
+		$this['status']='Complained';
+		$this->save();
+		
+		$com=$this->add('Model_Complain');
+		$com['from_id']=$from_id;
+		$com['against_id']=$against_id;
+		$com['message']=$msg;
+		
+		$com['gift_id'] = $this->id;
+
+		$com->save();
+
 	}
 }

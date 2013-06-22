@@ -39,7 +39,19 @@ class Model_PinPurchaseRequest extends Model_Table{
 		// then add an entry with from this->api->auth->modelid to searched persons
 	}
 
-	function sendToAdmin(){
+	function sendComplaint($from_id,$against_id,$msg){
+		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
+		$this['status']='Complained';
+		$this->save();
+		
+		$com=$this->add('Model_Complain');
+		$com['from_id']=$from_id;
+		$com['against_id']=$against_id;
+		$com['message']=$msg;
+		
+		$com['pin_request_id'] = $this->id;
+
+		$com->save();
 
 	}
 
