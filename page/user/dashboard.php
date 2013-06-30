@@ -6,7 +6,7 @@ class page_user_dashboard extends page_user {
 	function init(){
 		parent::init();
 
-		$this->api->add('View_Wallet',null,'wallet');
+		
 		
 		$columns=$this->add('Columns');
 		$l_small=$columns->addColumn(1);

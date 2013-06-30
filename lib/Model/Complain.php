@@ -14,6 +14,14 @@ class Model_Complain extends Model_Table {
 		$this->addField('created_at')->type('date')->defaultValue(date('Y-m-d H:i:s'));
 		$this->addField('status')->enum(array("Send","Abcd"))->defaultValue('Send');
 		$this->addField('action');
+		$this->addField('last_update_at')->type('date')->system(true);
 
+		$this->addHook('beforeSave',$this);
+
+	}
+
+
+	function beforeSave(){
+		$this['last_update_at'] = date('Y-m-d H:i:s');
 	}
 }

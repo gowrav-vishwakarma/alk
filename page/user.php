@@ -13,5 +13,7 @@ class page_user extends Page {
 		$this->user_menu->addMenuItem('user_newregistration','New Registration');
 		$this->user_menu->addMenuItem('user_profile','Profile');
 		$this->user_menu->addMenuItem('logout','Logout');
+
+		$this->api->add('View_Wallet',null,'wallet');
 	}
 }
