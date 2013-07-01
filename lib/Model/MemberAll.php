@@ -11,15 +11,16 @@ class Model_MemberAll extends Model_Table{
 		$this->addField('mobile_number');
 		$this->addField('email_id')->mandatory("This Field is must");
 		$this->addField('is_active')->type('boolean');
-		$this->addField('bank_name')->type('boolean')->mandatory("This Field is must");
-		$this->addField('account_number')->type('boolean')->mandatory("This Field is must");
-		$this->addField('IFSC')->type('boolean')->mandatory("This Field is must");
-		$this->addField('bank_location')->type('boolean')->mandatory("This Field is must");
+		$this->addField('bank_name')->mandatory("This Field is must");
+		$this->addField('account_number')->mandatory("This Field is must");
+		$this->addField('IFSC')->mandatory("This Field is must");
+		$this->addField('bank_location')->mandatory("This Field is must");
 		$this->addField('points_available')->system(true);
 		
 		$this->hasMany('MemberAll','sponsor_id');
-		$this->hasMany('Topups','member_id');
-		
+		$this->hasMany('GiftReceived','gift_to_id');
+		$this->hasMany('GiftSent','gift_from_id');
+
 
 		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);
@@ -33,7 +34,21 @@ class Model_MemberAll extends Model_Table{
 
 	function afterSave(){
 		if($this->recall('new_registration',false)){
-			$this->ref('Topups')->save();
+			$member =& $this;
+
+			for($i=1;$i<=4;$i++){
+				if($member->get('sponsor_id') == 0) break;
+				$receive_gift_request=$this->add('Model_Gift');
+				$sponsor = $member->ref('sponsor_id');
+
+				$receive_gift_request['gift_from_id'] = $this->id;
+				$receive_gift_request['gift_to_id'] = $sponsor->get('id');
+				$receive_gift_request['requested_level'] = $i;
+				$receive_gift_request->save();
+
+				$member=$sponsor;
+
+			}
 		}
 	}
 }

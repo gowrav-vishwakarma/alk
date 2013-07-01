@@ -9,9 +9,7 @@ class page_user_pinpurchaseincome extends Page{
 
 		$request_to_take=$this->add("Model_PinPurchaseRequest")->addCondition('id',$_GET['request_id'])->load($_GET['request_id']);
 
-		$request_from_member = $this->add('Model_Member');
-		$request_from_member->join('topups.member_id')->join('pin_purchase_request.request_from_id')->addField('request_pk','id');
-		$request_from_member->addCondition('request_pk',$request_to_take->id);
+		$request_from_member = $this->add('Model_Member')->addCondition('id',$request_to_take['request_from_id'])->tryLoadAny();
 
 		$this->add('H3')->set('Your got this request from the follwoing');
 		$grid=$this->add('Grid');
@@ -37,12 +35,16 @@ class page_user_pinpurchaseincome extends Page{
 			
 			if($approve_form->isSubmitted()){
 				$request_to_take->approve();
-				$approve_form->js(null,$approve_form->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'))->univ()->closeDialog()->execute();
+				$approve_form->js(null,array(
+										$approve_form->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'),
+										$approve_form->js()->_selector('.wallet')->trigger('reload_me'),
+										)
+									)->univ()->closeDialog()->execute();
 			}
 
 			if($reject_form->isSubmitted()){
 				$request_to_take->reject();
-				$approve_form->js(null,$approve_form->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'))->univ()->closeDialog()->execute();
+				$approve_form->js(null,$approve_form->js()->_selector('#'.$_GET['view_id'])->hide())->univ()->closeDialog()->execute();
 			}
 			
 		}

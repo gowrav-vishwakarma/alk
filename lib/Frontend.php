@@ -32,7 +32,7 @@ class Frontend extends ApiFrontend {
             ;
 
         // If you wish to restrict access to your pages, use BasicAuth class
-        $this->add('Menu',null,'Menu')
+        $menu = $this->add('Menu',null,'Menu')
             ->addMenuItem('index','Welcome')
             ->addMenuItem('user_dashboard','User Section')
         
@@ -43,6 +43,13 @@ class Frontend extends ApiFrontend {
         $auth->allowPage(array('index','reset'));
         $auth->setModel('Member','username','password');
         $auth->check();
+
+        if($auth->model->id == 1){
+            $menu->addMenuItem('admin_dashboard',"Admin");
+            $menu->addMenuItem('admin_pinrequestmanagement',"Pin Request Management");
+            $menu->addMenuItem('admin_complaints',"Complaint Solution");
+        }
+
             // ->allow('demo','demo')
             // use check() and allowPage for white-list based auth checking
 

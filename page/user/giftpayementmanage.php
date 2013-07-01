@@ -10,9 +10,9 @@ class page_user_giftpayementmanage extends Page {
 
 		$gift=$this->add('Model_Gift')->addCondition('id',$_GET['gift_id'])->load($_GET['gift_id']);
 
-		$gift_to_member=$this->add('Model_Member');
-		$gift_to_member->join('topups.member_id')->join('gift.gift_to_id')->addField("gift_pk",'id');
-		$gift_to_member->addCondition('gift_pk',$_GET['gift_id']);
+		$gift_to_member=$this->add('Model_Member')->addCondition("id",$gift['gift_to_id']);
+		// $gift_to_member->join('topups.member_id')->join('gift.gift_to_id')->addField("gift_pk",'id');
+		// $gift_to_member->addCondition('gift_pk',$_GET['gift_id']);
 
 
 
@@ -50,11 +50,9 @@ class page_user_giftpayementmanage extends Page {
 			$complaint_form->addSubmit('Send to Admin');
 
 			if($complaint_form->isSubmitted()){
-				$gift_to_member=$this->add('Model_Member');
-				$gift_to_member->join('topups.member_id')->join('gift.gift_to_id')->addField("gift_pk",'id');
-				$gift_to_member->addCondition('gift_pk',$_GET['gift_id']);
-
+				$gift_to_member=$this->add('Model_Member')->addCondition('id',$gift['gift_to_id']);
 				$gift_to_member->tryLoadAny();
+
 				$gift->sendComplaint($this->api->auth->model->id, $gift_to_member->id,$complaint_form->get('message'));
 				$complaint_form->js(null,$complaint_form->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'))->univ()->closeDialog()->execute();
 			}

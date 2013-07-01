@@ -5,9 +5,10 @@ class page_reset extends Page{
 
 
 		$this->api->db->dsql()->table("member")->truncate();
-		$this->api->db->dsql()->table("topups")->truncate();
 		$this->api->db->dsql()->table("gift")->truncate();
-		$this->api->db->dsql()->table("pins")->truncate();
+		$this->api->db->dsql()->table("pin_purchase_request")->truncate();
+		// $this->api->db->dsql()->table("topups")->truncate();
+		// $this->api->db->dsql()->table("pins")->truncate();
 		// $dsql->table("pins")->truncate();
 		// $dsql->table("requests")->truncate();
 

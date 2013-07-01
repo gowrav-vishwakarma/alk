@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5deb1
+-- version 3.5.7deb1.precise~ppa.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 21, 2013 at 09:22 PM
--- Server version: 5.1.61
--- PHP Version: 5.3.6-13ubuntu3.10
+-- Generation Time: Jul 01, 2013 at 10:51 PM
+-- Server version: 5.5.28-0ubuntu0.12.04.2
+-- PHP Version: 5.3.10-1ubuntu3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -23,6 +23,33 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `complains`
+--
+
+CREATE TABLE IF NOT EXISTS `complains` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gift_id` int(11) NOT NULL,
+  `pin_request_id` int(11) NOT NULL,
+  `from_id` int(11) NOT NULL,
+  `against_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `action` varchar(255) NOT NULL,
+  `last_update_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `complains`
+--
+
+INSERT INTO `complains` (`id`, `gift_id`, `pin_request_id`, `from_id`, `against_id`, `message`, `created_at`, `status`, `action`, `last_update_at`) VALUES
+(3, 11, 0, 6, 5, 'maine paisa diya hai', '2013-07-01 22:26:20', 'Send', '', '2013-07-01 22:26:20');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `filestore_file`
 --
 
@@ -36,21 +63,17 @@ CREATE TABLE IF NOT EXISTS `filestore_file` (
   `filenum` int(11) NOT NULL DEFAULT '0',
   `deleted` enum('Y','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=39 ;
 
 --
 -- Dumping data for table `filestore_file`
 --
 
 INSERT INTO `filestore_file` (`id`, `filestore_type_id`, `filestore_volume_id`, `filename`, `original_filename`, `filesize`, `filenum`, `deleted`) VALUES
-(1, 2, 1, '0/20130620225907_1_thumb-1ms-212660.jpg', 'thumb_1ms-212660.jpg', 0, 0, ''),
-(2, 2, 1, '0/20130620225907__1ms-212660.jpg', '1ms-212660.jpg', 246953, 0, ''),
-(3, 2, 1, '0/20130620225930_1_thumb-1ms-212660.jpg', 'thumb_1ms-212660.jpg', 0, 0, ''),
-(4, 2, 1, '0/20130620225930__1ms-212660.jpg', '1ms-212660.jpg', 246953, 0, ''),
-(15, 2, 1, '0/20130621130457_1_thumb-funny20.jpg', 'thumb_funny20.jpg', 0, 0, ''),
-(16, 2, 1, '0/20130621130457__funny20.jpg', 'funny20.jpg', 22927, 0, ''),
-(23, 2, 1, '0/20130621205154_1_thumb-321466-528906707151745-1926555858-n.jpg', 'thumb_321466_528906707151745_1926555858_n.jpg', 0, 0, ''),
-(24, 2, 1, '0/20130621205154__321466-528906707151745-1926555858-n.jpg', '321466_528906707151745_1926555858_n.jpg', 14615, 0, '');
+(35, 2, 1, '0/20130701210858_1_thumb-1.jpg', 'thumb_1.jpg', 0, 0, ''),
+(36, 2, 1, '0/20130701210858__1.jpg', '1.jpg', 107739, 0, ''),
+(37, 2, 1, '0/20130701221922_1_thumb-1.jpg', 'thumb_1.jpg', 0, 0, ''),
+(38, 2, 1, '0/20130701221922__1.jpg', '1.jpg', 107739, 0, '');
 
 -- --------------------------------------------------------
 
@@ -64,25 +87,15 @@ CREATE TABLE IF NOT EXISTS `filestore_image` (
   `original_file_id` int(11) NOT NULL DEFAULT '0',
   `thumb_file_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `filestore_image`
 --
 
 INSERT INTO `filestore_image` (`id`, `name`, `original_file_id`, `thumb_file_id`) VALUES
-(1, NULL, 2, 1),
-(2, NULL, 4, 3),
-(3, NULL, 6, 5),
-(4, NULL, 8, 7),
-(5, NULL, 10, 9),
-(6, NULL, 12, 11),
-(7, NULL, 14, 13),
-(8, NULL, 16, 15),
-(9, NULL, 18, 17),
-(10, NULL, 20, 19),
-(11, NULL, 22, 21),
-(12, NULL, 24, 23);
+(18, NULL, 36, 35),
+(19, NULL, 38, 37);
 
 -- --------------------------------------------------------
 
@@ -132,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `filestore_volume` (
 --
 
 INSERT INTO `filestore_volume` (`id`, `name`, `dirname`, `total_space`, `used_space`, `stored_files_cnt`, `enabled`, `last_filenum`) VALUES
-(1, 'upload', 'upload', 1000000000, 0, 24, 'Y', NULL);
+(1, 'upload', 'upload', 1000000000, 0, 38, 'Y', NULL);
 
 -- --------------------------------------------------------
 
@@ -151,23 +164,27 @@ CREATE TABLE IF NOT EXISTS `gift` (
   `requested_level` int(11) NOT NULL,
   `last_update_date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `gift`
 --
 
 INSERT INTO `gift` (`id`, `gift_to_id`, `gift_from_id`, `status`, `approved_rejected_date`, `bank_slip_id`, `gift_send_date`, `requested_level`, `last_update_date`) VALUES
-(1, 1, 2, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 1, '2013-06-21 21:07:53'),
-(2, 2, 3, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 1, '2013-06-21 21:07:53'),
-(3, 1, 3, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 2, '2013-06-21 21:07:53'),
-(4, 3, 4, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 1, '2013-06-21 21:07:53'),
-(5, 2, 4, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 2, '2013-06-21 21:07:53'),
-(6, 1, 4, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 3, '2013-06-21 21:07:53'),
-(7, 4, 5, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 1, '2013-06-21 21:07:53'),
-(8, 3, 5, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 2, '2013-06-21 21:07:53'),
-(9, 2, 5, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 3, '2013-06-21 21:07:53'),
-(10, 1, 5, 'Pending', '0000-00-00', 0, '2013-06-21 00:00:00', 4, '2013-06-21 21:07:54');
+(1, 1, 2, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 1, '2013-07-01 20:24:35'),
+(2, 2, 3, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 1, '2013-07-01 20:24:35'),
+(3, 1, 3, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 2, '2013-07-01 20:24:35'),
+(4, 3, 4, 'Approved', '0000-00-00', 0, '2013-07-01 00:00:00', 1, '2013-07-01 21:49:07'),
+(5, 2, 4, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 2, '2013-07-01 20:24:35'),
+(6, 1, 4, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 3, '2013-07-01 20:24:35'),
+(7, 4, 5, 'Approved', '0000-00-00', 0, '2013-07-01 00:00:00', 1, '2013-07-01 21:20:47'),
+(8, 3, 5, 'Approved', '0000-00-00', 0, '2013-07-01 00:00:00', 2, '2013-07-01 21:18:01'),
+(9, 2, 5, 'Approved', '0000-00-00', 0, '2013-07-01 00:00:00', 3, '2013-07-01 21:17:47'),
+(10, 1, 5, 'Approved', '0000-00-00', 0, '2013-07-01 00:00:00', 4, '2013-07-01 21:17:31'),
+(11, 5, 6, 'Complained', '0000-00-00', 38, '2013-07-01 00:00:00', 1, '2013-07-01 22:26:20'),
+(12, 4, 6, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 2, '2013-07-01 22:12:45'),
+(13, 3, 6, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 3, '2013-07-01 22:12:45'),
+(14, 2, 6, 'Pending', '0000-00-00', 0, '2013-07-01 00:00:00', 4, '2013-07-01 22:12:45');
 
 -- --------------------------------------------------------
 
@@ -190,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `member` (
   `bank_location` varchar(255) NOT NULL,
   `points_available` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `member`
@@ -201,24 +218,8 @@ INSERT INTO `member` (`id`, `sponsor_id`, `name`, `username`, `password`, `mobil
 (2, 1, 'root 2', 'root 2', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0),
 (3, 2, 'root 3', 'root 3', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0),
 (4, 3, 'root 4', 'root 4', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0),
-(5, 4, 'root 5', 'root 5', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pins`
---
-
-CREATE TABLE IF NOT EXISTS `pins` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_by_id` int(11) NOT NULL,
-  `current_owner_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `created_at` date NOT NULL,
-  `is_used` tinyint(4) NOT NULL,
-  `sold_on` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+(5, 4, 'root 5', 'root 5', '12344', 123456, 'root@a.com', 1, '1', '1', '1', '1', 3000),
+(6, 5, 'root 6', 'root 6', '12345', 1234567890, 'gowravvishwakarma@gmail.com', 1, 'yesbank', '12331', '112121', '12121kjhk', 0);
 
 -- --------------------------------------------------------
 
@@ -233,42 +234,16 @@ CREATE TABLE IF NOT EXISTS `pin_purchase_request` (
   `request_at` date NOT NULL,
   `status` varchar(20) NOT NULL,
   `bank_slip_id` int(11) NOT NULL,
+  `transfer_time` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `pin_purchase_request`
 --
 
-INSERT INTO `pin_purchase_request` (`id`, `request_from_id`, `currently_requested_to_id`, `request_at`, `status`, `bank_slip_id`) VALUES
-(1, 3, 1, '2013-06-20', 'Pending', 24),
-(2, 3, 3, '2013-06-20', 'Rejected', 16);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `topups`
---
-
-CREATE TABLE IF NOT EXISTS `topups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `member_id` int(11) NOT NULL,
-  `created_at` date NOT NULL,
-  `withdrawal_requested_on` date NOT NULL,
-  `is_withdrawable` tinyint(4) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Dumping data for table `topups`
---
-
-INSERT INTO `topups` (`id`, `member_id`, `created_at`, `withdrawal_requested_on`, `is_withdrawable`) VALUES
-(1, 1, '2013-06-21', '0000-00-00', 0),
-(2, 2, '2013-06-21', '0000-00-00', 0),
-(3, 3, '2013-06-21', '0000-00-00', 0),
-(4, 4, '2013-06-21', '0000-00-00', 0),
-(5, 5, '2013-06-21', '0000-00-00', 0);
+INSERT INTO `pin_purchase_request` (`id`, `request_from_id`, `currently_requested_to_id`, `request_at`, `status`, `bank_slip_id`, `transfer_time`) VALUES
+(1, 3, 1, '2013-07-01', 'Pending', 36, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

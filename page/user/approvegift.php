@@ -11,9 +11,9 @@ class page_user_approvegift extends Page{
 
 		if($r['status'] != 'Pending' AND $r['status'] != 'Complained') {
 			$this->add('View_Error')->set('This Gift is already ' . $r['status']);
-			return;
+			// return;
 		}		
-		$this->add('H2')->set('Are you sure, you want to approve Gift from '.$r->ref('gift_from_id')->ref('member_id')->get('name').' and mark as Received ... ?');
+		$this->add('H2')->set('Are you sure, you want to approve Gift from '.$r->ref('gift_from_id')->get('name').' and mark as Received ... ?');
 
 		$form=$this->add('Form');
 		$form->addField('hidden','request_id')->set($_GET['request_id']);

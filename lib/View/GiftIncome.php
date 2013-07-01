@@ -12,7 +12,7 @@ class View_GiftIncome extends View{
 		
 		// $this->add('Button',null,'message_button')->set('Message')->js('click')->univ()->frameURL('New Window',$this->api->url());
 		$this->template->trySet('requested_date',date('d-M-Y',strtotime($model['gift_send_date'])));
-		$this->template->trySet('gift_from',$model->ref('gift_from_id')->ref('member_id')->get('name'));
+		$this->template->trySet('gift_from',$model->ref('gift_from_id')->get('name'));
 		$this->template->trySet('at_level',$model['requested_level']);
 		$this->template->trySet('status',$model['status']);
 

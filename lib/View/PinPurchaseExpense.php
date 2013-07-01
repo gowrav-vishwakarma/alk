@@ -15,6 +15,13 @@ class View_PinPurchaseExpense extends View {
 			// $this->js('mouseover')->_selector('#'.$this->name . " img")->attr('border','2px solid black');
 			// $this->js('mouseout')->_selector('#'.$this->name . " img")->attr('border','none');
 		}
+
+		$this->template->trySet('request_at',$model['request_at']);
+		if($model['currently_requested_to_id']==1)
+			$this->template->trySet('request_to',"ADMIN");
+		else
+			$this->template->trySet('request_to',$model->ref('currently_requested_to_id')->get('name'));
+
 		parent::setModel($model);
 	}
 

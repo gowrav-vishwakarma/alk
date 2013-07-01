@@ -4,8 +4,8 @@ class Model_Gift extends Model_Table {
 	function init(){
 		parent::init();
 
-		$this->hasOne('Topups','gift_from_id');
-		$this->hasOne('Topups','gift_to_id');
+		$this->hasOne('MemberAll','gift_from_id');
+		$this->hasOne('MemberAll','gift_to_id');
 		$this->addField('requested_level')->enum(array(1,2,3,4))->system(true);
 		$this->addField('gift_send_date')->type('date')->defaultValue(date('Y-m-d'));
 		$this->addField('status')->enum(array("Pending","Approved","Rejected","Admin Approved"))->defaultValue('Pending');
@@ -25,16 +25,10 @@ class Model_Gift extends Model_Table {
 		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
 		$this['status'] = 'Approved';
 		$this->save();
-		if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() == 4){
+		if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() % 4 == 0){
 			$sender = $this->ref('gift_from_id');
-			if($sender['is_withdrawable'] == false){
-				$sender['is_withdrawable']=true;
-				$sender->save();
-
-				$member= $sender->ref('member_id');
-				$member['points_available'] = $member['points_available'] + 6000;
-				$member->save();
-			}
+			$sender['points_available'] = $sender['points_available'] + 6000;
+			$sender->save();
 		}
 
 		// Nutralize any complins for this gift IF ANY
@@ -44,7 +38,10 @@ class Model_Gift extends Model_Table {
 		$com->addCondition('status','Send');
 		
 		foreach($com as $c){
-			$com['status']='Aprroved By Receiver';
+			if($this->api->auth->model->id == 1)
+				$com['status']='Aprroved By Admin';
+			else
+				$com['status']='Aprroved By Receiver';
 			$com->saveAndUnload();
 		}
 
@@ -64,7 +61,7 @@ class Model_Gift extends Model_Table {
 		// }
 	}
 
-	function sendComplaint($from_id,$against_id,$gift_id=null,$pin_request_id=null,$msg){
+	function sendComplaint($from_id,$against_id,$msg){
 		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
 		$this['status']='Complained';
 		$this->save();

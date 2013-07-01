@@ -4,39 +4,28 @@ class Model_PinPurchaseRequest extends Model_Table{
 	function init(){
 		parent::init();
 
-		$this->hasOne('Topups','request_from_id');
-		$this->hasOne('Topups','currently_requested_to_id');
-		$this->addField('request_at')->type('date');
-		$this->addfield('status')->enum(array('Pending','Accepted',"Complained",'forwarded','Rejected'));
+		$this->hasOne('Member','request_from_id');
+		$this->hasOne('Member','currently_requested_to_id');
+		$this->addField('request_at')->type('date')->defaultValue(date('Y-m-d'));
+		$this->addfield('status')->enum(array('Pending','Accepted',"Complained",'forwarded','Rejected'))->defaultValue('Pending');
 		$this->add("filestore/Field_Image","bank_slip_id")->type('image');//->display(array("grid"=>'picture'));
+		$this->addField('transfer_time');
+		// $this->addExpression('pin_purchase_request_from')->set(function ($m,$q){
+		// 	return $m->ref('request_from_id')->fieldQuery('name');
+		// });
 
-		$this->addExpression('pin_purchase_request_from')->set(function ($m,$q){
-			$m1=$m->add('Model_PinPurchaseRequest');
-			$m1->table_alias='temp11';
-
-			$mem=$m1->join('topups.id','request_from_id')->join('member.id','member_id');
-			$mem->addField('ffffffname','name');
-
-			$m1->addCondition('id',$q->getField('id'));
-			return $m1->fieldQuery('ffffffname');
-		});
-
-		$this->addExpression('pin_purchase_request_to')->set(function ($m,$q){
-			$m1=$m->add('Model_PinPurchaseRequest');
-			$m1->table_alias='temp11';
-
-			$mem=$m1->join('topups.id','currently_requested_to_id')->join('member.id','member_id');
-			$mem->addField('ffffffname','name');
-
-			$m1->addCondition('id',$q->getField('id'));
-			return $m1->fieldQuery('ffffffname');
-		});
+		// $this->addExpression('pin_purchase_request_to')->set(function ($m,$q){
+		// 	return $m->ref('currently_requested_to_id')->fieldQuery('name');
+		// });
 
 	}
 
 	function generateRequest($points){
 		// search best person to send request
 		// then add an entry with from this->api->auth->modelid to searched persons
+		$this['request_from_id'] = $this->api->auth->model->id;
+		$this['currently_requested_to_id'] = 1;
+		$this->save();
 	}
 
 	function sendComplaint($from_id,$against_id,$msg){
@@ -57,11 +46,29 @@ class Model_PinPurchaseRequest extends Model_Table{
 
 	function approve(){
 		// First check if you have such points available
+		$points= $this->ref('currently_requested_to_id')->get('points_available');
+		if($points < 3000)
+			$this->api->js()->univ()->errorMessage("Not suficcient points available, [ $points ]")->execute();
 		// Send point to the requester and less from your self ... 
+
+		$purchaser= $this->add('Model_MemberAll')->addCondition("id",$this['request_from_id'])->tryLoadAny();
+		$purchaser['points_available'] = $purchaser['points_available'] + 3000;
+		$purchaser->save();
+
+		$seller=$this->add('Model_MemberAll')->addCondition("id",$this['currently_requested_to_id'])->tryLoadAny();
+		$seller['points_available'] = $seller['points_available'] - 3000;
+		$seller->save();
+
+		$this['status']='Approved';
+		$this->save();
+
+
 	}
 
 	function reject(){
 		//reject the request 
+		$this['currently_requested_to_id']=1;
+		$this->save();
 		//forward the request to another available person
 	}
 
