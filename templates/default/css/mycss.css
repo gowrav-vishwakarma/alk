@@ -5,3 +5,23 @@
 .pinpurchaseincome {
 	border: 1px dashed green;	
 }
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
+}
+
+.giftincome {
+	border: 1px solid gray;
+}
+
+.giftexpense {
+	border: 1px solid gray;
+}
+
+#atk-logo{
+	width: 170px;
+}

@@ -11,6 +11,7 @@ class View_PinPurchaseIncome extends View{
 	function setModel($model){
 
 		if($model['status']=='Pending')	$this->add('Button',null,'btn')->set('Action')->addClass('span12')->js('click')->univ()->frameURL('Manage This Request',$this->api->url('user_pinpurchaseincome',array('request_id'=>$model->id,'view_id'=>$this->name)));
+		$this->template->trySet('points_required',$model['points_required']);
 		
 		if($model['bank_slip_id']) {
 			$this->template->trySet('slip_img',$model['bank_slip']);

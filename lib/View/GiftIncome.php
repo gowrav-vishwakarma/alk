@@ -16,18 +16,27 @@ class View_GiftIncome extends View{
 		$this->template->trySet('at_level',$model['requested_level']);
 		$this->template->trySet('status',$model['status']);
 
+		$in=array(0,1000,500,500,1000);
+		$this->template->trySet('amount',$in[$model['requested_level']]);
+		
+
 		if($model['bank_slip_id']){
 			$img =$this->add('HtmlElement',null,'slip_preview')->setElement('img')->setAttr('src',$model['bank_slip'])->setAttr('width','80')->setAttr('height','80');
 			$img->js('click')->univ()->dialogURL('Image Preivew',$this->api->url('imageview',array('image_url'=>$model['bank_slip'])));
 		}
+		$buttons=false;
 
 		if($model['status']=='Pending'){
-			$this->add('P',null,'reject_button')->set('Reject')->js('click')->univ()->frameURL('Approve Gift',$this->api->url('user_rejectgift',array('request_id'=>$model->id)));
+			$this->add('Button',null,'reject_button')->set('Reject')->js('click')->univ()->frameURL('Approve Gift',$this->api->url('user_rejectgift',array('request_id'=>$model->id)));
+			$buttons=true;
 		}
 
 		if($model['status']=='Pending' OR $model['status']=='Rejected' OR $model['status']=='Complained'){
-			$this->add('P',null,'approve_button')->set('Approve')->js('click')->univ()->frameURL('Approve Gift',$this->api->url('user_approvegift',array('request_id'=>$model->id)));
+			$this->add('Button',null,'approve_button')->set('Approve')->js('click')->univ()->frameURL('Approve Gift',$this->api->url('user_approvegift',array('request_id'=>$model->id)));
+			$buttons=true;
 		}
+
+		if(!$buttons) $this->template->trySet('box_height',"120px");
 		
 		parent::setModel($model);
 	}

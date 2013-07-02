@@ -6,6 +6,7 @@ class View_PinPurchaseExpenseList extends View {
 
 		$my_pins= $this->add('Model_PinPurchaseRequest');
 		$my_pins->addCondition('request_from_id',$model->id);
+		$my_pins->setOrder('id desc');
 
 		foreach ($my_pins as $junk) {
 			$this->add('View_PinPurchaseExpense')->setModel($my_pins);

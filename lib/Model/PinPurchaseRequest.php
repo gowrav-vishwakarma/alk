@@ -10,6 +10,8 @@ class Model_PinPurchaseRequest extends Model_Table{
 		$this->addfield('status')->enum(array('Pending','Accepted',"Complained",'forwarded','Rejected'))->defaultValue('Pending');
 		$this->add("filestore/Field_Image","bank_slip_id")->type('image');//->display(array("grid"=>'picture'));
 		$this->addField('transfer_time');
+		$this->addField('points_required');
+		$this->addField('last_update_date')->type('date');
 		// $this->addExpression('pin_purchase_request_from')->set(function ($m,$q){
 		// 	return $m->ref('request_from_id')->fieldQuery('name');
 		// });
@@ -18,13 +20,21 @@ class Model_PinPurchaseRequest extends Model_Table{
 		// 	return $m->ref('currently_requested_to_id')->fieldQuery('name');
 		// });
 
+		$this->addHook('beforeSave',$this);
+
 	}
+
+	function beforeSave(){
+		$this['last_update_date'] = date('Y-m-d H:i:s');
+	}
+
 
 	function generateRequest($points){
 		// search best person to send request
 		// then add an entry with from this->api->auth->modelid to searched persons
 		$this['request_from_id'] = $this->api->auth->model->id;
 		$this['currently_requested_to_id'] = 1;
+		$this['points_required'] = $points;
 		$this->save();
 	}
 

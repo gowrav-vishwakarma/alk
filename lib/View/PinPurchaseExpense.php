@@ -17,8 +17,15 @@ class View_PinPurchaseExpense extends View {
 		}
 
 		$this->template->trySet('request_at',$model['request_at']);
+		$this->template->trySet('points_required',$model['points_required']);
+
+		// $this->add('HR',null,'details');
+		// $cols=$this->add('Columns',null,'details');
+		// $cols->addColumn(6)->add('H3')->set($model->ref('currently_requested_to_id')->get('bank_name'))->sub('Bank Name');
+		// $cols->addColumn(6)->add('H3')->set($model->ref('currently_requested_to_id')->get('IFSC'))->sub('IFSC');
+
 		if($model['currently_requested_to_id']==1)
-			$this->template->trySet('request_to',"ADMIN");
+			$this->template->trySet('request_to',"SYSTEM");
 		else
 			$this->template->trySet('request_to',$model->ref('currently_requested_to_id')->get('name'));
 

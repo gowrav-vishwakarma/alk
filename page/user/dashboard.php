@@ -14,17 +14,18 @@ class page_user_dashboard extends page_user {
 		$member->load($this->api->auth->model->id);
 
 		$columns=$this->add('Columns');
-		$l_small=$columns->addColumn(1);
-		$left_col=$columns->addColumn(6);
-		$right_col=$columns->addColumn(4);
-		$r_small=$columns->addColumn(1);
+		$l_small=$columns->addColumn(3);
+		$left_col=$columns->addColumn(3);
+		$right_col=$columns->addColumn(3);
+		$r_small=$columns->addColumn(3);
 
-		$l_small->add('H4')->set("Pin Purchase Request");
+		$l_small->add('H4')->set("Some One Wants Points From You");
 		$l_small->add('View_PinPurchaseIncomeList')->setModel($this->api->auth->model);
+		$r_small->add('H4')->set("You Requested For Points Purchase");
 		$r_small->add('View_PinPurchaseExpenseList')->setModel($this->api->auth->model);
 		
-		$left_col->add('H3')->set('Your Income Part');
-		$right_col->add('H3')->set('Your Invest Part ['.$member['approved_gift_sent_count'].']');
+		$left_col->add('H4')->set('Your Income Part');
+		$right_col->add('H4')->set('Your Invest Part ['.$member['approved_gift_sent_count'].']');
 
 		$left_col->add('View_GiftIncomeList')->setModel($this->api->auth->model);
 		$right_col->add('View_GiftExpenseList')->setModel($this->api->auth->model);

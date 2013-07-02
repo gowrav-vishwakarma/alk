@@ -4,7 +4,7 @@ class Model_Gift extends Model_Table {
 	function init(){
 		parent::init();
 
-		$this->hasOne('MemberAll','gift_from_id');
+		$this->hasOne('MemberAll','gift_from_id')->caption('Help from');
 		$this->hasOne('MemberAll','gift_to_id');
 		$this->addField('requested_level')->enum(array(1,2,3,4))->system(true);
 		$this->addField('gift_send_date')->type('date')->defaultValue(date('Y-m-d'));
@@ -27,6 +27,8 @@ class Model_Gift extends Model_Table {
 			$this['status'] = 'Approved By Admin';
 		else
 			$this['status'] = 'Approved';
+
+		$this['approved_rejected_date'] = date('Y-m-d H:i:s');
 
 		$this->save();
 		$approved_gifts_count= $this->ref('gift_from_id')->ref('GiftSent')->addCondition('status',"like",'%Approved%')->count()->getOne();
@@ -61,6 +63,8 @@ class Model_Gift extends Model_Table {
 			$this['status'] = 'Rejected By Admin';
 		else
 			$this['status'] = 'Rejected';
+
+		$this['approved_rejected_date'] = date('Y-m-d H:i:s');
 
 		$this->save();
 		// if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() == 4){

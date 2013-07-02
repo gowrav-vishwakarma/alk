@@ -33,21 +33,22 @@ class Frontend extends ApiFrontend {
 
         // If you wish to restrict access to your pages, use BasicAuth class
         $menu = $this->add('Menu',null,'Menu')
-            ->addMenuItem('index','Welcome')
             ->addMenuItem('user_dashboard','User Section')
+            ->addMenuItem('system','System')
         
-            ->addMenuItem('logout')
+            // ->addMenuItem('logout')
             ;
             
         $auth=$this->add('BasicAuth');
-        $auth->allowPage(array('index','reset'));
-        $auth->setModel('Member','username','password');
+        $auth->allowPage(array('index','reset','system'));
+        $auth->setModel('Member','email_id','password');
         $auth->check();
 
         if($auth->model->id == 1){
             $menu->addMenuItem('admin_dashboard',"Admin");
             $menu->addMenuItem('admin_pinrequestmanagement',"Pin Request Management");
             $menu->addMenuItem('admin_complaints',"Complaint Solution");
+            $menu->addMenuItem('admin_pointmanagement',"Point Management");
         }
 
             // ->allow('demo','demo')
@@ -62,6 +63,8 @@ class Frontend extends ApiFrontend {
 
         // If you are using a complex menu, you can re-define
         // it and place in a separate class
+
+        // $this->add('H2',null,'logo')->set('BuiltUp4')->setStyle('color','red');
 
         $this->addLayout('UserMenu');
     }
