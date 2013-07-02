@@ -23,9 +23,14 @@ class Model_Gift extends Model_Table {
 
 	function approve(){
 		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
-		$this['status'] = 'Approved';
+		if($this->api->auth->model->id == 1)
+			$this['status'] = 'Approved By Admin';
+		else
+			$this['status'] = 'Approved';
+
 		$this->save();
-		if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() % 4 == 0){
+		$approved_gifts_count= $this->ref('gift_from_id')->ref('GiftSent')->addCondition('status',"like",'%Approved%')->count()->getOne();
+		if(($approved_gifts_count % 4 == 0)){
 			$sender = $this->ref('gift_from_id');
 			$sender['points_available'] = $sender['points_available'] + 6000;
 			$sender->save();
@@ -52,7 +57,11 @@ class Model_Gift extends Model_Table {
 
 	function reject(){
 		if(!$this->loaded()) throw $this->exception('Request not loaded, something wrong happened');
-		$this['status'] = 'Rejected';
+		if($this->api->auth->model->id == 1)
+			$this['status'] = 'Rejected By Admin';
+		else
+			$this['status'] = 'Rejected';
+
 		$this->save();
 		// if($this->ref('gift_from_id')->ref('GiftSent')->addCondition('status','Approved')->count()->getOne() == 4){
 		// 	$sender = $this->ref('gift_from_id');

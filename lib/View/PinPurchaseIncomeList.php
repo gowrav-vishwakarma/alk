@@ -11,6 +11,7 @@ class View_PinPurchaseIncomeList extends View {
 			$this->add('View_PinPurchaseIncome')->setModel($my_pins);
 		}
 
+		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Pin Request');
 		parent::setModel($model);
 	}
 }

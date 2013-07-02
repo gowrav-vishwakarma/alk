@@ -59,7 +59,11 @@ class Model_PinPurchaseRequest extends Model_Table{
 		$seller['points_available'] = $seller['points_available'] - 3000;
 		$seller->save();
 
-		$this['status']='Approved';
+		if($this->api->auth->model->id == 1)
+			$this['status']='Approved By Admin';
+		else
+			$this['status']='Approved';
+
 		$this->save();
 
 
@@ -68,6 +72,7 @@ class Model_PinPurchaseRequest extends Model_Table{
 	function reject(){
 		//reject the request 
 		$this['currently_requested_to_id']=1;
+		$this['status']='Pending';
 		$this->save();
 		//forward the request to another available person
 	}

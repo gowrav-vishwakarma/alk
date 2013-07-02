@@ -19,6 +19,7 @@ class page_user_dashboard extends page_user {
 		$right_col=$columns->addColumn(4);
 		$r_small=$columns->addColumn(1);
 
+		$l_small->add('H4')->set("Pin Purchase Request");
 		$l_small->add('View_PinPurchaseIncomeList')->setModel($this->api->auth->model);
 		$r_small->add('View_PinPurchaseExpenseList')->setModel($this->api->auth->model);
 		

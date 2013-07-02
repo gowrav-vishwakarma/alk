@@ -11,6 +11,8 @@ class View_PinPurchaseExpenseList extends View {
 			$this->add('View_PinPurchaseExpense')->setModel($my_pins);
 		}
 
+		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Pin Request');
+
 		parent::setModel($model);
 	}
 }
