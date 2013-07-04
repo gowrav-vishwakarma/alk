@@ -16,6 +16,7 @@ class page_user extends Page {
 		$this->user_menu->addMenuItem('user_income','My Income');
 		$this->user_menu->addMenuItem('logout','Logout');
 
+		// $this->api->add('View_Wallet',null,'wallet');
 		$this->api->add('View_Wallet',null,'wallet');
 		$this->add('HtmlElement')->setElement('br');
 	}

@@ -19,7 +19,7 @@ class View_PinPurchaseIncome extends View{
 			// $this->js('mouseover')->_selector('#'.$this->name . " img")->attr('border','2px solid black');
 			// $this->js('mouseout')->_selector('#'.$this->name . " img")->attr('border','none');
 		}
-		$this->template->trySet('request_at',$model['request_at']);
+		$this->template->trySet('request_at',date("d-M-Y",strtotime($model['request_at'])));
 		$this->template->trySet('request_from',$model->ref('request_from_id')->get('name'));
 
 		parent::setModel($model);

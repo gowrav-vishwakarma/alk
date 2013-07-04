@@ -16,7 +16,7 @@ class page_user_pinpurchaserequest extends Page{
 
 			if($form->get('your_password') != $m['password']) $form->displayError('your_password','Password is not correct');
 
-			if($form->get('points_required') > 5) $form->displayError('points_required','You cannot request for more then 5 points at a time');
+			if($form->get('points_required') > 1) $form->displayError('points_required','You cannot request for more then 1 points at a time');
 
 			$ppr=$this->add('Model_PinPurchaseRequest');
 			$ppr->generateRequest($form->get('points_required'));

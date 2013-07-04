@@ -13,7 +13,7 @@ class page_user_pinpurchasepayment extends Page {
 		// $request_to_member->join('topups.member_id')->join('pin_purchase_request.currently_requested_to_id')->addField('request_pk','id');
 		// $request_to_member->addCondition('request_pk',$request_to_pay->id);
 		if($request_to_member->id == 1) {
-			$this->add('H3')->set('Your request is sent to the system, Please wait while the system transfers your request to other person');
+			$this->add('H3')->set('Your request is sent, Please wait while the request is transfered.');
 			return;
 		}else{
 			$this->add('H3')->set('Your request is sent to the follwoing');

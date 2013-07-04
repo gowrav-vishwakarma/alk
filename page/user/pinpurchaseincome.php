@@ -34,6 +34,9 @@ class page_user_pinpurchaseincome extends Page{
 			$reject_form->addSubmit('Reject');
 			
 			if($approve_form->isSubmitted()){
+
+				if($request_to_take['bank_slip_id']==0) $approve_form->js()->univ()->errorMessage("No Bank Slip Found, Cannot Approve")->execute();;
+
 				$request_to_take->approve();
 				$approve_form->js(null,array(
 										$approve_form->js()->_selector('#'.$_GET['view_id'])->trigger('reload_me'),
