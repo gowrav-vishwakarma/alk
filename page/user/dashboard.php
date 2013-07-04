@@ -18,7 +18,7 @@ class page_user_dashboard extends page_user {
 		$right_col=$columns->addColumn(3);
 		$r_small=$columns->addColumn(3);
 
-		$l_small->add('H4')->set("Some One Wants Points From You");
+		$l_small->add('H4')->set("Some One Wants Points From You")->setStyle("border","1px solid red");
 		$l_small->add('View_PinPurchaseIncomeList')->setModel($this->api->auth->model);
 		$r_small->add('H4')->set("You Requested For Points Purchase");
 		$r_small->add('View_PinPurchaseExpenseList')->setModel($this->api->auth->model);

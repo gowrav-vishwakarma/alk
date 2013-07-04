@@ -6,9 +6,16 @@ class page_forgotpassword extends Page {
 		parent::init();
 
 
+
+
 		$form = $this->add('Form');
+
+		if($_GET['success']){
+			$form->add('View_Info')->set('Password sent succesfully on your email');
+		}
+
 		$form->addField('line','login_email_id');
-		$form->addSubmit('Send My Password');
+		$form->addSubmit('Send My Password')->js('click')->hide();
 
 		if($form->isSubmitted()){
 
@@ -29,7 +36,7 @@ class page_forgotpassword extends Page {
 			$email_body=$msg->render();
 			$email_id = $form->get('login_email_id');
 
-			$subject ="Hi this is and sending you a important business oppertunity.";
+			$subject ="Password recovery email";
 			try{
 				$tm->send( $email_id, "help3gift@gmail.com", $subject, $email_body ,null);
 			}catch( phpmailerException $e ) {
@@ -37,9 +44,10 @@ class page_forgotpassword extends Page {
 			}catch( Exception $e ) {
 				throw $e;
 			}
+
+			$form->js()->reload(array('success'=>1))->execute();
 		}
 
-		$form->js()->reload()->execute();
 
 	}
 }
