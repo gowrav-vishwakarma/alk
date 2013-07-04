@@ -34,7 +34,7 @@ class page_user_newregistration extends page_user {
 			$member->save();
 
 			$form->update();
-			$form->js(null,$form->js()->_selector('.wallet')->trigger('reload_me'),)->reload()->execute();
+			$form->js(null,$form->js()->_selector('.wallet')->trigger('reload_me'))->reload()->execute();
 		}
 
 	}

@@ -27,7 +27,7 @@ class Model_MemberAll extends Model_Table{
 		$this->hasMany('GiftSent','gift_from_id');
 
 
-		$this->addExpression('name')->set('CONCAT(name, " :: ", email_id )');
+		$this->addExpression('name')->set('CONCAT(member.name, " :: ",member.email_id )');
 
 		$this->addHook('beforeSave',$this);
 		$this->addHook('afterSave',$this);
