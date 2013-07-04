@@ -12,7 +12,7 @@ class View_PinPurchaseIncomeList extends View {
 			$pi->setModel($my_pins);
 		}
 
-		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Pin Request')->setStyle("border","1px solid lightgreen")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all')->setStyle("background","lightgreen");;
+		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Points Request')->setStyle("border","1px solid lightgreen")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all')->setStyle("background","lightgreen");;
 		parent::setModel($model);
 	}
 }

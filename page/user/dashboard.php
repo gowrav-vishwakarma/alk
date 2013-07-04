@@ -20,7 +20,7 @@ class page_user_dashboard extends page_user {
 
 		$l_small->add('H4')->set("Some One Wants Points From You")->setStyle("border","1px solid lightgreen")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all giftincome  gift_income_1')->setStyle("background","lightgreen");
 		$l_small->add('View_PinPurchaseIncomeList')->setModel($this->api->auth->model);
-		$r_small->add('H4')->set("You Requested For Points Purchase")->setStyle("border","1px solid red")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all giftincome  gift_income_1')->setStyle("background","#ffaaaa");
+		$r_small->add('H4')->set("You Requested For Points Purchase")->setStyle("border","1px solid red")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all')->setStyle("background","#ffaaaa");
 		$r_small->add('View_PinPurchaseExpenseList')->setModel($this->api->auth->model);
 		
 		$left_col->add('H4')->set('Your Income Part')->setStyle("border","1px solid lightblue")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all giftincome  gift_income_1')->setStyle("background","lightblue");

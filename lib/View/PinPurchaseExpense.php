@@ -18,6 +18,7 @@ class View_PinPurchaseExpense extends View {
 
 		$this->template->trySet('request_at',date("d-M-Y",strtotime($model['request_at'])));
 		$this->template->trySet('points_required',$model['points_required']);
+		$this->template->trySet('status',$model['status']);
 
 		// $this->add('HR',null,'details');
 		// $cols=$this->add('Columns',null,'details');

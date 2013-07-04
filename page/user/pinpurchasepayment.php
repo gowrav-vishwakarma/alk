@@ -22,8 +22,7 @@ class page_user_pinpurchasepayment extends Page {
 		}
 
 
-
-		$this->add('H3')->set('Manage Your BankSlip');
+		if($request_to_pay['status']=='Pending') $this->add('H3')->set('Manage Your BankSlip');
 		$cols=$this->add('Columns');
 		$left=$cols->addColumn(6);
 		$right=$cols->addColumn(6);
@@ -45,7 +44,7 @@ class page_user_pinpurchasepayment extends Page {
 			
 		}
 
-		if($request_to_pay['status']=='Rejected' OR $request_to_pay['status']=='Pending'){
+		if($request_to_pay['status']=='Rejected' OR $request_to_pay['status']=='Pending' OR $request_to_pay['status']=='Rejected By Admin'){
 			$left->add('H3')->set('Your Payment is rejected/Not approved, you can send a complaine to admin')->setStyle('color','red');
 			$complaint = $left->add('Form');
 			$complaint->addField('line','msg','Message')->validateNotNull();

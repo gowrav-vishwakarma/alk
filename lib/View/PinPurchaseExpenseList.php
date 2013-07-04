@@ -13,7 +13,7 @@ class View_PinPurchaseExpenseList extends View {
 			$pe->setModel($my_pins);
 		}
 
-		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Pin Request');
+		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Points Request')->setStyle("border","1px solid red")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all')->setStyle("background","#ffaaaa");
 
 		parent::setModel($model);
 	}
