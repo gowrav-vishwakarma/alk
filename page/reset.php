@@ -19,7 +19,7 @@ class page_reset extends Page{
 		for($i=1;$i<=5;$i++){
 
 			$member=$this->add('Model_Member');
-			$member['name']="root ".$i;
+			$member['full_name']="root ".$i;
 			$member['sponsor_id']= $sponsor_id;
 			// $member['username']="root ".$i;
 			$member['password']="12344";

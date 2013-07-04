@@ -9,7 +9,7 @@ class page_user_newregistration extends page_user {
 		if($member['points_available'] < 3000) $this->add('View_Error')->set('You do not have sufficient points available');
 
 		$form=$this->add('Form');
-		$form->setModel('Member',array("sponsor_id",'name','email_id','password','mobile_number','city','state','bank_name','account_number','IFSC','bank_location'));
+		$form->setModel('Member',array("sponsor_id",'full_name','email_id','password','mobile_number','city','state','bank_name','account_number','IFSC','bank_location'));
 
 		$form->getElement('sponsor_id')->model->_dsql()->where('points_available','>=',3000);
 
@@ -34,7 +34,7 @@ class page_user_newregistration extends page_user {
 			$member->save();
 
 			$form->update();
-			$form->js(null,$form->js()->_selector('.wallet')->trigger('reload_me'),)->reload()->execute();
+			$form->js(null,$form->js()->_selector('.wallet')->trigger('reload_me'))->reload()->execute();
 		}
 
 	}
