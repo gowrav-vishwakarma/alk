@@ -15,8 +15,10 @@ class page_user_downline extends page_user {
 		$l1m=$this->add('Model_MemberAll');
 		$l1m->addCondition('sponsor_id',$this->api->auth->model->id);
 		$grid1 = $tab_level_1->add('Grid');
-		$grid1->setModel($l1m,array('name','city','state','email_id','Joining_Date'));
+		
+		$grid1->setModel($l1m->debug(),array('name','city','state','email_id','Joining_Date'));
 		$grid1->addPaginator(20);
+		// throw $this->exception("Error Processing Request".$l1m['name']);
 
 		
 		$l2m=$this->add('Model_MemberAll');
