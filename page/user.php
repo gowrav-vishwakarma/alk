@@ -18,6 +18,7 @@ class page_user extends Page {
 
 		// $this->api->add('View_Wallet',null,'wallet');
 		$this->api->add('View_Wallet',null,'wallet');
+		$this->api->add('View',null,'wallet')->setHTML('For any support kindly email to <b>info@builtup4.org</b>');
 		$this->add('HtmlElement')->setElement('br');
 	}
 }

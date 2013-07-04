@@ -1,4 +1,4 @@
-<div id ="<?$_name?>" class='atk-notification ui-state-highlight ui-corner-all giftincome <?$class?>'  style="height:<?box_height?>150px<?/box_height?>">
+<div id ="<?$_name?>" class='atk-notification ui-state-highlight ui-corner-all giftincome <?$class?>'  style="<?$style?>; height:<?box_height?>150px<?/box_height?>">
 	<div>
 		<div style="float:left"><?requested_date?>Gift Income Date<?/requested_date?></div>
 		<div style="float:right"><?status?>---<?/status?></div>
@@ -6,12 +6,12 @@
 	<div style="clear:both"></div>
 	<div>
 		<div style="float:left; width: 30%">
-			<h3><?slip_preview?><img src='http://placehold.it/80x80&text=bank_slip'/><?/slip_preview?></h3>
+			<?slip_preview?><img src='http://placehold.it/80x80&text=bank_slip'/><?/slip_preview?>
 		</div>
 		<div style="float:left; margin: 5px"><?$approve_button?></div>
 		<div style="float:left; margin: 5px"><?$reject_button?></div>
 		<div style="float:right; width: 70%">
-			<h3><?gift_from?>gift from<?/gift_from?> <br/>[Level - <?at_level?>--<?/at_level?>]</h3>
+			<h5><?gift_from?>gift from<?/gift_from?> <br/>[Level - <?at_level?>--<?/at_level?>]</h5>
 			<b>Amount To Receive</b> : <?amount?>Bank Details<?/amount?>
 		</div>
 	</div>
