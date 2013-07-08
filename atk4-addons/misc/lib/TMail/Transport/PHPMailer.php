@@ -1,5 +1,5 @@
 <?php
-class TMail_Transport_PHPMailer extends TMail_Transport {
+class TMail_Transport_PHPMailer extends AbstractObject {
     function connect(){
         $this->fid = fsockopen(
             $this->api->getConfig("tmail/smtp/host"),
@@ -12,7 +12,7 @@ class TMail_Transport_PHPMailer extends TMail_Transport {
             throw $this->exception("Could not connect to mail server: " . $this->errorStr);
         }   
     } 
-    function send($o,$to,$from,$subject,$body,$headers){
+    function send($to,$from,$subject,$body,$headers=""){
         require_once("PHPMailer/class.phpmailer.php");
         $mail = new PHPMailer(true);
         $mail->IsSMTP();
@@ -22,6 +22,7 @@ class TMail_Transport_PHPMailer extends TMail_Transport {
         $mail->Port       = $this->api->getConfig("tmail/smtp/port");
         $mail->Username   = $this->api->getConfig("tmail/phpmailer/username", null);
         $mail->Password   = $this->api->getConfig("tmail/phpmailer/password", null);
+        $mail->SMTPAuthSecure = 'ssl';
         $mail->AddReplyTo($this->api->getConfig("tmail/phpmailer/reply_to"), $this->api->getConfig("tmail/phpmailer/reply_to_name"));
         $mail->AddAddress($to);
         $mail->SetFrom($this->api->getConfig("tmail/phpmailer/from"), $this->api->getConfig("tmail/phpmailer/from_name"));

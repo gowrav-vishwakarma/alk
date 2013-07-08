@@ -10,6 +10,8 @@
 // agile_project - this is realm. It should be unique per-project
 // jui - this is theme. Keep it jui unless you want to make your own theme
 
+
+date_default_timezone_set('Asia/Calcutta');
 include 'atk4/loader.php';
 $api=new Frontend('s');
 $api->main();

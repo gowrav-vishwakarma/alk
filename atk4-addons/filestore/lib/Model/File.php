@@ -93,7 +93,7 @@ class Model_File extends \Model_Table {
             $path = $this->get('filename')?$this->getPath():$this->import_source;
             if(!$path)throw $this->exception('Load file entry from filestore or import');
 
-            if(!function_exists('finfo_open'))throw $this->exception('You have to enable php_fileinfo extension of PHP.');
+            if(!function_exists('finfo_open'))throw $this->exception('You have to enable php_fileinfo extension of PHP.')->addMoreInfo('Path',$path);
             $finfo = finfo_open(FILEINFO_MIME_TYPE, $this->magic_file);	
             if($finfo===false)throw $this->exception("Can't find magic_file in finfo_open().")
                 ->addMoreInfo('Magic_file: ',isnull($this->magic_file)?'default':$this->magic_file);
