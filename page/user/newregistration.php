@@ -9,16 +9,26 @@ class page_user_newregistration extends page_user {
 		if($member['points_available'] < 3000) $this->add('View_Error')->set('You do not have sufficient points available');
 
 		$form=$this->add('Form');
-		$form->setModel('Member',array("sponsor_id",'name','email_id','password','mobile_number','city','state','bank_name','account_number','IFSC','bank_location'));
+		$form->addField('line','sponsor_id');
 
-		$form->getElement('sponsor_id')->model->_dsql()->where('points_available','>=',3000);
+		$form->setModel('Member',array('full_name','email_id','password','mobile_number','city','state','bank_name','account_number','IFSC','bank_location'));
 
+		//$form->getElement('sponsor_id')->model->_dsql()->where('points_available','>=',3000);
+		
+		
 		$form->addField('password','re_password');
 		$form->add('Order')->move('re_password','after','password')->now();
 
 		$form->addSubmit();
 
 		if($form->isSubmitted()){
+		
+			$sp=$this->add('Model_MemberAll');
+			$sp->addCondition('points_available','>=',3000);
+			$sp->addCondition('email_id',$form->get('sponsor_id'));
+			$sp->tryLoadAny();
+			if(!$sp->loaded()) $form->displayError('sponsor_id','Either this sponsor is not available or the sponsor do not have points');
+		
 			if($form->get('password') != $form->get('re_password'))
 				$form->displayError('re_password','Password must match');
 
@@ -32,7 +42,8 @@ class page_user_newregistration extends page_user {
 			
 			$member['points_available'] = $member['points_available'] - 3000;
 			$member->save();
-
+			
+			$form->model['sponsor_id']=$sp->id;
 			$form->update();
 			$form->js(null,$form->js()->_selector('.wallet')->trigger('reload_me'))->reload()->execute();
 		}

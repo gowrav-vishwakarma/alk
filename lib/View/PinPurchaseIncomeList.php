@@ -8,10 +8,11 @@ class View_PinPurchaseIncomeList extends View {
 		$my_pins->addCondition('currently_requested_to_id',$model->id);
 
 		foreach ($my_pins as $junk) {
-			$this->add('View_PinPurchaseIncome')->setModel($my_pins);
+			$pi=$this->add('View_PinPurchaseIncome')->setStyle("border","1px solid lightgreen")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all giftincome  gift_income_1')->setStyle("background","lightgreen");
+			$pi->setModel($my_pins);
 		}
 
-		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Pin Request');
+		if($my_pins->count()->getOne()==0) $this->add('View_Warning')->set('Points Request')->setStyle("border","1px solid lightgreen")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all')->setStyle("background","lightgreen");;
 		parent::setModel($model);
 	}
 }

@@ -34,7 +34,7 @@ class Model_Gift extends Model_Table {
 		$approved_gifts_count= $this->ref('gift_from_id')->ref('GiftSent')->addCondition('status',"like",'%Approved%')->count()->getOne();
 		if(($approved_gifts_count % 4 == 0)){
 			$sender = $this->ref('gift_from_id');
-			$sender['points_available'] = $sender['points_available'] + 6000;
+			$sender['points_available'] = $sender['points_available'] + 12000;
 			$sender->save();
 		}
 

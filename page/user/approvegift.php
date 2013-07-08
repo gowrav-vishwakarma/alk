@@ -12,7 +12,13 @@ class page_user_approvegift extends Page{
 		if($r['status'] != 'Pending' AND $r['status'] != 'Complained') {
 			$this->add('View_Error')->set('This Gift is already ' . $r['status']);
 			// return;
-		}		
+		}
+
+		if($r['bank_slip_id']==0){
+			$this->add('View_Error')->set('No Image Found... You cannot approve it');
+			return;
+		}
+
 		$this->add('H2')->set('Are you sure, you want to approve Gift from '.$r->ref('gift_from_id')->get('name').' and mark as Received ... ?');
 
 		$form=$this->add('Form');

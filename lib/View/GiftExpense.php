@@ -13,8 +13,10 @@ class View_GiftExpense extends View{
 		$this->add('Button',null,'form')->set('manage bank slip')->addClass('span12')->js('click')->univ()->frameURL('Manage Your Gift Payment',$this->api->url('user_giftpayementmanage',array('view_id'=>$this->name,'gift_id'=>$model->id)));
 
 		$this->template->trySet('status',$model['status']);
-		$this->template->trySet('requested_date',date('Y-m-d',strtotime($model['gift_send_date'])));
+		$this->template->trySet('requested_date',date('d-M-Y',strtotime($model['gift_send_date'])));
 		$this->template->trySet('gift_to',$model->ref('gift_to_id')->get('name'));
+		$in=array(0,1000,500,500,1000);
+		$this->template->trySet('amount',$in[$model['requested_level']]);
 		
 		if($model['bank_slip_id']){
 			$img =$this->add('HtmlElement',null,'slip_preview')->setElement('img')->setAttr('src',$model['bank_slip'])->setAttr('width','80')->setAttr('height','80');

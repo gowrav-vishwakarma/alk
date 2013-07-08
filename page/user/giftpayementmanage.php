@@ -27,7 +27,7 @@ class page_user_giftpayementmanage extends Page {
 
 		$right->add('HtmlElement')->setElement('img')->setAttr('src',$gift['bank_slip']);
 
-		if($gift['status']=='Pending' OR $gift['status']=='Rejected'){
+		if($gift['status']=='Pending' OR $gift['status']=='Rejected' OR $gift['status']=='Rejected By Admin'){
 			$left->add('H4')->set('Manage your bank slip');
 			$image_form=$left->add('Form');
 			$image_form->setModel($gift,array('bank_slip_id'));
@@ -43,7 +43,7 @@ class page_user_giftpayementmanage extends Page {
 			$left->add('View_Error')->set('This Payment is marked as Compalained, You cannot change Bank Slip now');
 		}
 
-		if($gift['status']=='Rejected'){
+		if($gift['status']=='Rejected'  OR $gift['status']=='Rejected By Admin'){
 			$complaint_form = $left->add('Form');
 			$complaint_form->add('View_Error')->set('This Gift you sent is rejected by receiver, You can place a complaint to admin');
 			$complaint_form->addField('line','message');

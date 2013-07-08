@@ -16,8 +16,9 @@ class View_PinPurchaseExpense extends View {
 			// $this->js('mouseout')->_selector('#'.$this->name . " img")->attr('border','none');
 		}
 
-		$this->template->trySet('request_at',$model['request_at']);
+		$this->template->trySet('request_at',date("d-M-Y",strtotime($model['request_at'])));
 		$this->template->trySet('points_required',$model['points_required']);
+		$this->template->trySet('status',$model['status']);
 
 		// $this->add('HR',null,'details');
 		// $cols=$this->add('Columns',null,'details');
@@ -25,7 +26,7 @@ class View_PinPurchaseExpense extends View {
 		// $cols->addColumn(6)->add('H3')->set($model->ref('currently_requested_to_id')->get('IFSC'))->sub('IFSC');
 
 		if($model['currently_requested_to_id']==1)
-			$this->template->trySet('request_to',"SYSTEM");
+			$this->template->trySet('request_to',"REQUEST SENT");
 		else
 			$this->template->trySet('request_to',$model->ref('currently_requested_to_id')->get('name'));
 

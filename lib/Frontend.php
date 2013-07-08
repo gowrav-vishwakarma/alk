@@ -40,7 +40,7 @@ class Frontend extends ApiFrontend {
             ;
             
         $auth=$this->add('BasicAuth');
-        $auth->allowPage(array('index','reset','system'));
+        $auth->allowPage(array('index','reset','system','forgotpassword'));
         $auth->setModel('Member','email_id','password');
         $auth->check();
 

@@ -13,7 +13,7 @@ class page_user_pinpurchasepayment extends Page {
 		// $request_to_member->join('topups.member_id')->join('pin_purchase_request.currently_requested_to_id')->addField('request_pk','id');
 		// $request_to_member->addCondition('request_pk',$request_to_pay->id);
 		if($request_to_member->id == 1) {
-			$this->add('H3')->set('Your request is sent to the system, Please wait while the system transfers your request to other person');
+			$this->add('H3')->set('Your request is sent, Please wait while the request is transfered.');
 			return;
 		}else{
 			$this->add('H3')->set('Your request is sent to the follwoing');
@@ -22,8 +22,7 @@ class page_user_pinpurchasepayment extends Page {
 		}
 
 
-
-		$this->add('H3')->set('Manage Your BankSlip');
+		if($request_to_pay['status']=='Pending') $this->add('H3')->set('Manage Your BankSlip');
 		$cols=$this->add('Columns');
 		$left=$cols->addColumn(6);
 		$right=$cols->addColumn(6);
@@ -45,7 +44,7 @@ class page_user_pinpurchasepayment extends Page {
 			
 		}
 
-		if($request_to_pay['status']=='Rejected' OR $request_to_pay['status']=='Pending'){
+		if($request_to_pay['status']=='Rejected' OR $request_to_pay['status']=='Pending' OR $request_to_pay['status']=='Rejected By Admin'){
 			$left->add('H3')->set('Your Payment is rejected/Not approved, you can send a complaine to admin')->setStyle('color','red');
 			$complaint = $left->add('Form');
 			$complaint->addField('line','msg','Message')->validateNotNull();

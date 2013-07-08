@@ -12,11 +12,20 @@ class page_admin_pointmanagement extends page_admin {
 			return $m->refSQL('GiftSent')->_dsql()->fieldQuery('approved_rejected_date')->limit(1)->order('approved_rejected_date','desc');
 		});
 
+		$members->addExpression('total_referals')->set(function($m,$q){
+			$m1=$m->add('Model_MemberAll');
+			$m1->table_alias="sp_mem";
+			$m1->addCondition('sponsor_id',$q->getField('id'));
+			return $m1->count();
+		});
+
 
 		$crud=$this->add('CRUD',array('allow_del'=>false,'allow_add'=>false));
+
+		$members->getElement('password')->display(array('form'=>'line','grid'=>'text'));
 		
 
-		$crud->setModel($members,array('name','username','password','mobile_number','email_id','is_active','bank_name','account_number','IFSC','bank_location','points_available'),array('name','username','password','mobile_number','email_id','is_active','bank_name','account_number','IFSC','bank_location','points_available','system_points','approved_gift_sent_count',"last_approve_date",'Joining_Date'));
+		$crud->setModel($members,array('name','username','password','mobile_number','email_id','is_active','bank_name','account_number','IFSC','bank_location','points_available'),array('name','username','password','mobile_number','email_id','is_active','bank_name','account_number','IFSC','bank_location','points_available','system_points','approved_gift_sent_count',"last_approve_date",'Joining_Date','total_referals'));
 
 		if($_GET['give_system_points']){
 			$m=$this->add('Model_MemberAll');

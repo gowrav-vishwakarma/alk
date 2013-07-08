@@ -11,7 +11,8 @@ class View_GiftIncomeList extends View {
 		$my_gifts->addCondition('gift_to_id',$model->id);
 
 		foreach($my_gifts as $gift_array){
-			$this->add('View_GiftIncome')->setModel($my_gifts);
+			$gi=$this->add('View_GiftIncome')->setStyle("border","1px solid lightblue")->setStyle('padding','3px')->addClass('atk-notification ui-state-highlight ui-corner-all')->setStyle("background","lightblue");
+			$gi->setModel($my_gifts);
 		}
 
 		parent::setModel($model);
