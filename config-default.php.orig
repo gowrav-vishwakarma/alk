@@ -1,0 +1,43 @@
+<?php
+
+$config['atk']['base_path']='./atk4/';
+$config['dsn']='mysql://root:winserver@localhost/alk';
+
+$config['url_postfix']='';
+$config['url_prefix']='?page=';
+
+# Agile Toolkit attempts to use as many default values for config file,
+# and you only need to add them here if you wish to re-define default
+# values. For more options look at:
+#
+#  http://www.atk4.com/doc/config
+
+<<<<<<< HEAD
+=======
+
+$config['tmail']['transport'] = "PHPMailer";
+$config['tmail']['phpmailer']['from'] = "help3gift@gmail.com";
+// $config['tmail']['from'] = "help3gift@gmail.com";
+$config['tmail']['phpmailer']['from_name'] = "3Gift System";
+$config['tmail']['smtp']['host'] = "ssl://smtp.gmail.com";
+$config['tmail']['smtp']['port'] = 465;
+$config['tmail']['phpmailer']['username'] = "help3gift@gmail.com";
+$config['tmail']['phpmailer']['password'] = "helphelphelp3gift";
+$config['tmail']['phpmailer']['reply_to'] = "help3gift@gmail.com";
+$config['tmail']['phpmailer']['reply_to_name'] = "3Gift System";
+
+>>>>>>> 8fd38f9bafdc2b9c6e7518191423b0fec8ce22a5
+$config['tmail']['transport'] = "PHPMailer";
+$config['tmail']['phpmailer']['from'] = "info@builtup4.org";
+$config['tmail']['from'] = "";
+$config['tmail']['phpmailer']['from_name'] = "Built Up 4";
+$config['tmail']['smtp']['host'] = "ssl://mail.builtup4.org";
+$config['tmail']['smtp']['port'] = 465;
+$config['tmail']['phpmailer']['username'] = "info@builtup4.org";
+$config['tmail']['phpmailer']['password'] = "Info@123";
+$config['tmail']['phpmailer']['reply_to'] = "no-reply@builtup4.org";
+<<<<<<< HEAD
+$config['tmail']['phpmailer']['reply_to_name'] = "No-Reply";
+=======
+$config['tmail']['phpmailer']['reply_to_name'] = "No-Reply";
+>>>>>>> 8fd38f9bafdc2b9c6e7518191423b0fec8ce22a5

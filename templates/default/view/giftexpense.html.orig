@@ -1,0 +1,22 @@
+<<<<<<< HEAD
+<div id ="<?$_name?>" class='atk-notification ui-state-highlight ui-corner-all giftexpense <?$class?>'  style="height:120px; <?$style?>">
+=======
+<div id ="<?$_name?>" class='atk-notification ui-state-error ui-corner-all giftexpense <?$class?>'  style="height:120px; <?$style?>">
+>>>>>>> 8fd38f9bafdc2b9c6e7518191423b0fec8ce22a5
+	<div>
+		<div style="float:left"><?requested_date?>Gift Expense Date<?/requested_date?></div>
+		<div style="float:right"><i class="<?$icon?>" style="float:left"></i><?status?>[APPROVE] [REJECT]<?/status?></div>
+	</div>
+	<div style="clear:both"></div>
+	<div class="atk-row">
+		<div class="span6">
+			<h5><?gift_to?>gift To<?/gift_to?></h5>
+<<<<<<< HEAD
+			<b>Amount To Send</b> : <?amount?>Bank Details<?/amount?>
+=======
+>>>>>>> 8fd38f9bafdc2b9c6e7518191423b0fec8ce22a5
+			<?$form?>
+		</div>
+		<div class="span6" align="right"><?slip_preview?><img src='http://placehold.it/100x100&text=your slip' width='80' height='80'/><?/slip_preview?></div>
+	</div>
+</div>
