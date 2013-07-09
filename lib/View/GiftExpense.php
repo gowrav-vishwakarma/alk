@@ -19,7 +19,8 @@ class View_GiftExpense extends View{
 		$this->template->trySet('amount',$in[$model['requested_level']]);
 		
 		if($model['bank_slip_id']){
-			$img =$this->add('HtmlElement',null,'slip_preview')->setElement('img')->setAttr('src',$model['bank_slip'])->setAttr('width','80')->setAttr('height','80');
+			// $img =$this->add('HtmlElement',null,'slip_preview')->setElement('img')->setAttr('src',$model['bank_slip'])->setAttr('width','80')->setAttr('height','80');
+			$img =$this->add('Button',null,'slip_preview')->set('Slip');
 			$img->js('click')->univ()->dialogURL('Image Preivew',$this->api->url('imageview',array('image_url'=>$model['bank_slip'])));
 		}
 
