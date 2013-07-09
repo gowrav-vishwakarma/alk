@@ -17,7 +17,7 @@ class page_user_income extends page_user{
 		$l1=$m1->ref('GiftReceived')->addCondition('status','like','%Approve%')->addCondition('requested_level',1);
 
 		$grid1 = $tab_level_1->add('Grid');
-		$grid1->setModel($l1,array('gift_from'));
+		$grid1->setModel($l1,array('gift_from','approved_rejected_date'));
 		$grid1->addColumn('text','income');
 		$grid1->setFormatter('income','levelincome');
 
@@ -30,7 +30,7 @@ class page_user_income extends page_user{
 		$l2=$m2->ref('GiftReceived')->addCondition('status','like','%Approve%')->addCondition('requested_level',2);
 
 		$grid2 = $tab_level_2->add('Grid');
-		$grid2->setModel($l2,array('gift_from'));
+		$grid2->setModel($l2,array('gift_from','approved_rejected_date'));
 
 		$grid2->addColumn('text','income');
 		$grid2->setFormatter('income','levelincome');
@@ -43,7 +43,7 @@ class page_user_income extends page_user{
 		$l3=$m3->ref('GiftReceived')->addCondition('status','like','%Approve%')->addCondition('requested_level',3);
 
 		$grid3 = $tab_level_3->add('Grid');
-		$grid3->setModel($l3,array('gift_from'));
+		$grid3->setModel($l3,array('gift_from','approved_rejected_date'));
 		$grid3->addColumn('text','income');
 		$grid3->setFormatter('income','levelincome');
 
@@ -55,7 +55,7 @@ class page_user_income extends page_user{
 		$l4=$m4->ref('GiftReceived')->addCondition('status','like','%Approve%')->addCondition('requested_level',4);
 
 		$grid4 = $tab_level_4->add('Grid');
-		$grid4->setModel($l4,array('gift_from'));
+		$grid4->setModel($l4,array('gift_from','approved_rejected_date'));
 		$grid4->addColumn('text','income');
 		$grid4->setFormatter('income','levelincome');
 

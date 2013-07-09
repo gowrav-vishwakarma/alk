@@ -7,7 +7,20 @@ class page_user_pointstransfer extends page_user {
 		$form=$this->add('Form',null,null,array('form_horizontal'));
 		if($_GET['success']) $form->add('View_Info')->set('Points Transfered');
 
-		$form->addField('line','transfer_to')->validateNotNull();
+		$transfer_field = $form->addField('line','transfer_to')->validateNotNull();
+		// $name_field = $transfer_field->add('Text',null,'after_field');
+		// if($_GET['transfer_to']){
+		// 	$transfer_field->set($_GET['transfer_to']);
+		// 	$temp=$this->add('Model_MemberAll');
+		// 	$temp->addCondition('email_id',$_GET['transfer_to']);
+		// 	$temp->tryLoadAny();
+			
+		// 	$name_field->set($temp['name']);
+		// }
+
+		// $transfer_field->js('blur',$transfer_field->js()->atk4_form('reloadField','transfer_to',array($this->api->url(),'transfer_to'=>$transfer_field->js()->val())));
+
+
 		$form->addField('number','no_of_points')->validateNotNull();
 		$form->addField('password','your_password');
 		$form->addSubmit("Transfer");
@@ -54,7 +67,7 @@ class page_user_pointstransfer extends page_user {
 			$t['no_of_points'] = $form->get('no_of_points');
 			$t->save();
 
-			$form->js()->reload(array('success'=>1))->execute();
+			$form->js(null,$form->js()->_selector('.wallet')->trigger('reload_me'))->reload(array('success'=>1))->execute();
 		}
 	}
 }
