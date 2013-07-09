@@ -21,7 +21,8 @@ class View_GiftIncome extends View{
 		
 
 		if($model['bank_slip_id']){
-			$img =$this->add('HtmlElement',null,'slip_preview')->setElement('img')->setAttr('src',$model['bank_slip'])->setAttr('width','80')->setAttr('height','80');
+			// $img =$this->add('HtmlElement',null,'slip_preview')->setElement('img')->setAttr('src',$model['bank_slip'])->setAttr('width','80')->setAttr('height','80');
+			$img =$this->add('Button',null,'slip_preview')->set('Slip');//->setElement('img')->setAttr('src','http://placehold.it/50x50&text=')->setAttr('width','50')->setAttr('height','50');
 			$img->js('click')->univ()->dialogURL('Image Preivew',$this->api->url('imageview',array('image_url'=>$model['bank_slip'])));
 		}
 		$buttons=false;
