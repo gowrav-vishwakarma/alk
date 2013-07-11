@@ -18,7 +18,7 @@ class page_system extends Page{
 		
 		$col1->add('H4')->set("How To Get Benifit")->setStyle('font-size','15px')
 									->setStyle('text-weight','bold');
-		$col1->add('View_Info')->set("This is a very uniqe system, In which commitment Amount. - 6000  
+		$col1->add('View_Info')->set("This is a very uniqe system, In which commitment Amount. - 6000/- Rs.  
 									50% in start as pin amount and 50% on afterwords. You can even earn more 
 									by selling/transferring your points.");
 

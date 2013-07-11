@@ -20,8 +20,7 @@
 		</script>
 	</head>
 	<body>
-		<div id="atk-layout" class="atk-wrapper">
-			<div id="header">
+			<div id="header" class='header' style="height:100px; border-bottom:2px solid lightgray">
 				<?logo?><div id="atk-logo" class="ui-widget-header float-left"><a 
                                     href="<?page?>index<?/?>"><img src="<?template?>images/logo.png<?/?>" /></a></div><?/logo?>
 				<div id="header-right">
@@ -35,11 +34,12 @@
 					<div id="atk-version"><?wallet?>-<?/wallet?></div>
 				</div>
 			</div>
+		<div id="atk-layout" class="atk-wrapper">
 			<?$Content?>
 			<div id="atk-footer-guard"></div>
 		</div>
 		<?Footer?>
-		<div id="footer" class="atk-wrapper">
+		<div id="footer" class="atk-wrapper header" style="height:100px; border-top:2px solid lightgray">
 			<?footer_text?><?/?>
 		</div>
 		<?/?>

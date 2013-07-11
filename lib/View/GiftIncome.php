@@ -37,7 +37,7 @@ class View_GiftIncome extends View{
 			$buttons=true;
 		}
 
-		if(!$buttons) $this->template->trySet('box_height',"120px");
+		if(!$buttons) $this->template->trySet('box_height',"150px");
 		
 		parent::setModel($model);
 	}

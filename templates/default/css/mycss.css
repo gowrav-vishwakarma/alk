@@ -25,3 +25,21 @@
 #atk-logo{
 	width: 170px;
 }
+.header { 
+	/* fallback */ 
+	background-color: #1a82f7; background: url(images/linear_bg_2.png); background-repeat: repeat-x; 
+	/* Safari 4-5, Chrome 1-9 */ 
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#E6E6E6)); 
+	/* Safari 5.1, Chrome 10+ */ 
+	background: -webkit-linear-gradient(center top , #FFFFFF 0%, #E6E6E6 50%);
+	 /* Firefox 3.6+ */ 
+	 background: -moz-linear-gradient(center top , #FFFFFF 0%, #E6E6E6 50%) repeat scroll 0 0 transparent;
+	  /* IE 10 */ 
+	  background: -ms-linear-gradient(center top , #FFFFFF 0%, #E6E6E6 50%); 
+	/* Opera 11.10+ */ 
+	background: -o-linear-gradient(center top , #FFFFFF 0%, #E6E6E6 50%);
+
+	/*-moz-linear-gradient() repeat scroll 0 0 transparent*/
+
+	
+	 }
